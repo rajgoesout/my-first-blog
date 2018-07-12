@@ -1,16 +1,16 @@
 body {
-	padding-left: 15px;
+    padding-left: 15px;
 }
 
 h1 a {
-	color: #FCA205;
-	font-family: 'Lobster';
+    color: #FCA205;
+    font-family: 'Lobster';
 }
 
 .page-header {
-	background-color: #ff9400;
-	margin-top: 0;
-	padding: 20px 20px 20px 40px;
+    background-color: #ff9400;
+    margin-top: 0;
+    padding: 20px 20px 20px 40px;
 }
 
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
