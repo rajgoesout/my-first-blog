@@ -17,7 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from django.contrib.auth.views import LoginView, logout_then_login
+
 urlpatterns = [
     path('admin/', admin.site.urls), # for every URL that starts with 'admin/' django will find a view
+    path('accounts/login/', LoginView.as_view(), name='login'),
+    path('accounts/logout/', logout_then_login, name='logout'),
     path('', include('blog.urls')),
 ]
