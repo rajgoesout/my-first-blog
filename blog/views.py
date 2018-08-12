@@ -15,14 +15,16 @@ def post_detail(request, pk):
 
 
 def post_new(request):
+    # when we access the page for the first time and we want a blank form
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
+            post = form.save(commit=False) # commit=False means that we don't want to save the Post model yet – we want to add the author first
+            post.author = request.user # current user (who is logged in) since there was no author field in the form
+            # post.published_date = timezone.now()
             post.save()
-            return redirect('post_detail', pk=post.pk)
+            return redirect('post_detail', pk=post.pk) # go to the post_detail page for the newly created post
+    # when we go back to the view with all form data we just typed
     else:
         form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
@@ -35,9 +37,26 @@ def post_edit(request, pk):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.published_date = timezone.now()
+            # post.published_date = timezone.now()
             post.save()
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
+
+
+def post_draft_list(request):
+    posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
+    return render(request, 'blog/post_draft_list.html', {'posts': posts})
+
+
+def post_publish(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.publish()
+    return redirect('post_detail', pk=pk)
+
+
+def post_remove(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.delete()
+    return redirect('post_list')
