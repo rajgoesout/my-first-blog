@@ -1,7 +1,7 @@
 # my-first-blog
 
 This is a blog application made using Django.
-You can find the live blog here: [http://rajdeepbharati.pythonanywhere.com/](http://rajdeepbharati.pythonanywhere.com/)
+You can find the live blog here: [Rajdeep's Blog](https://rajdeepbharati.pythonanywhere.com)
 
 ## Getting Started
 * Clone this repo
